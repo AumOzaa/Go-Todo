@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/AumOzaa/Go-Todo/internal/tools"
 	"github.com/go-chi/chi"
 	// "github.com/go-chi/chi/middleware"
 	log "github.com/sirupsen/logrus"
@@ -18,7 +19,7 @@ func main() {
 		dateParam := chi.URLParam(r, "date")
 		slugParam := chi.URLParam(r, "slug")
 
-		article, err := database.GetArticle(dateParam, slugParam)
+		article, err := tools.GetArticle(dateParam, slugParam)
 
 		if err != nil {
 			w.WriteHeader(422)

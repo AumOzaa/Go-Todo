@@ -1,4 +1,4 @@
-module github.com/AumOzaa/Go-Todo.git
+module github.com/AumOzaa/Go-Todo
 
 go 1.26.1
 

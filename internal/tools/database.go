@@ -9,13 +9,17 @@ type returnArticle struct {
 	Description string
 }
 
-func GetArticle(dateParams string, s string) returnArticle {
+func GetArticle(dateParams string, s string) (returnArticle, error) {
 
-	var returnArticle returnArticle
+	var article returnArticle
 	fmt.Println("In the database")
 
-	returnArticle.Title = "The who got seleceted"
-	returnArticle.Description = "The article is coming up soon"
+	article.Title = "The who got seleceted"
+	article.Description = "The article is coming up soon"
 
-	return returnArticle
+	if article.Title == "" {
+		return returnArticle{}, fmt.Errorf("article is empty")
+	}
+
+	return article, nil
 }
