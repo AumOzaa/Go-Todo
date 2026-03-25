@@ -1,7 +1,7 @@
 package models
 
-type todo struct {
-	id        int
-	task      string
-	completed int
+type Todo struct {
+	Id        int
+	Task      string
+	Completed int
 }

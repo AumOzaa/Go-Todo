@@ -2,6 +2,7 @@ package tools
 
 import (
 	"fmt"
+	"github.com/AumOzaa/Go-Todo/models"
 )
 
 type returnArticle struct {
@@ -22,4 +23,17 @@ func GetArticle(dateParams string, s string) (returnArticle, error) {
 	}
 
 	return article, nil
+}
+
+var MockTodos = []models.Todo{
+	{
+		Id:        1,
+		Task:      "Code",
+		Completed: 1,
+	},
+	{
+		Id:        2,
+		Task:      "GYM",
+		Completed: 0,
+	},
 }

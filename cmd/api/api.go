@@ -3,9 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/AumOzaa/Go-Todo/internal/tools"
-	"github.com/go-chi/chi"
 	"net/http"
+
+	"github.com/AumOzaa/Go-Todo/internal/tools"
+	"github.com/AumOzaa/Go-Todo/models"
+	"github.com/go-chi/chi"
+
 	// "github.com/go-chi/chi/middleware"
 	log "github.com/sirupsen/logrus"
 )
@@ -33,6 +36,15 @@ func main() {
 		w.Header().Set("Content-Type", "application/json")
 		fmt.Printf("%v", article)
 		json.NewEncoder(w).Encode(article)
+
+	})
+
+	r.Get("/list", func(w http.ResponseWriter, r *http.Request) {
+		// var todos []models.Todo
+
+		for i := 0; i < len(tools.MockTodos); i++ {
+			fmt.Println(i)
+		}
 
 	})
 
