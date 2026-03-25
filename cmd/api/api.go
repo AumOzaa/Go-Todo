@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/AumOzaa/Go-Todo/internal/tools"
-	"github.com/AumOzaa/Go-Todo/models"
+	// "github.com/AumOzaa/Go-Todo/models"
 	"github.com/go-chi/chi"
 
 	// "github.com/go-chi/chi/middleware"
@@ -45,6 +45,11 @@ func main() {
 		for i := 0; i < len(tools.MockTodos); i++ {
 			fmt.Println(i)
 		}
+
+		fmt.Println(tools.MockTodos)
+
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(tools.MockTodos)
 
 	})
 
