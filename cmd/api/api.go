@@ -15,6 +15,8 @@ func main() {
 
 	r := chi.NewRouter()
 
+	fmt.Println("API Service Started....")
+
 	r.Get("/articles/{date}-{slug}", func(w http.ResponseWriter, r *http.Request) {
 		dateParam := chi.URLParam(r, "date")
 		slugParam := chi.URLParam(r, "slug")
@@ -28,18 +30,10 @@ func main() {
 			return
 		}
 
-		if err != nil {
-			w.WriteHeader(404)
-			w.Write([]byte("article not foun"))
-			return
-		}
-
-		// w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Content-Type", "application/json")
 		fmt.Printf("%v", article)
 		json.NewEncoder(w).Encode(article)
-		// var userResponse := article
 
-		// w.Write([]byte(article.Text()))
 	})
 
 	http.ListenAndServe(":8000", r)
