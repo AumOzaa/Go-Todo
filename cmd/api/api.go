@@ -1,11 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"net/http"
-
 	"github.com/AumOzaa/Go-Todo/internal/tools"
 	"github.com/go-chi/chi"
+	"net/http"
 	// "github.com/go-chi/chi/middleware"
 	log "github.com/sirupsen/logrus"
 )
@@ -28,13 +28,18 @@ func main() {
 			return
 		}
 
-		if article == nil {
+		if err != nil {
 			w.WriteHeader(404)
 			w.Write([]byte("article not foun"))
 			return
 		}
 
-		w.Write([]byte(article.Text()))
+		// w.Header().Set("Content-Type", "application/json")
+		fmt.Printf("%v", article)
+		json.NewEncoder(w).Encode(article)
+		// var userResponse := article
+
+		// w.Write([]byte(article.Text()))
 	})
 
 	http.ListenAndServe(":8000", r)
