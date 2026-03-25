@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/AumOzaa/Go-Todo/internal/tools"
+	"github.com/AumOzaa/Go-Todo/models"
 	// "github.com/AumOzaa/Go-Todo/models"
 	"github.com/go-chi/chi"
 
@@ -40,13 +41,20 @@ func main() {
 	})
 
 	r.Get("/list", func(w http.ResponseWriter, r *http.Request) {
-		// var todos []models.Todo
 
-		for i := 0; i < len(tools.MockTodos); i++ {
-			fmt.Println(i)
+		todoIs := models.Todo{
+			Id:        4,
+			Task:      "Chess",
+			Completed: 0,
 		}
 
 		fmt.Println(tools.MockTodos)
+
+		UpdatedTodo := append(tools.MockTodos, todoIs)
+
+		fmt.Println(UpdatedTodo)
+
+		tools.MockTodos = UpdatedTodo
 
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(tools.MockTodos)
