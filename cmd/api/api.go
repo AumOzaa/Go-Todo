@@ -42,23 +42,43 @@ func main() {
 
 	r.Get("/list", func(w http.ResponseWriter, r *http.Request) {
 
-		todoIs := models.Todo{
-			Id:        4,
-			Task:      "Chess",
-			Completed: 0,
+		// todoIs := models.Todo{
+		// 	Id:        4,
+		// 	Task:      "Chess",
+		// 	Completed: 0,
+		// }
+		//
+		// fmt.Println(tools.MockTodos)
+		//
+		// UpdatedTodo := append(tools.MockTodos, todoIs)
+		//
+		// fmt.Println(UpdatedTodo)
+		//
+		// tools.MockTodos = UpdatedTodo
+
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(tools.MockTodos)
+
+	})
+
+	r.Post("/addtodo", func(w http.ResponseWriter, r *http.Request) {
+		var newTodo models.Todo
+
+		err := json.NewDecoder(r.Body).Decode(&newTodo)
+
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
 		}
 
-		fmt.Println(tools.MockTodos)
+		fmt.Printf("\n %v", newTodo)
 
-		UpdatedTodo := append(tools.MockTodos, todoIs)
-
-		fmt.Println(UpdatedTodo)
+		UpdatedTodo := append(tools.MockTodos, newTodo)
 
 		tools.MockTodos = UpdatedTodo
 
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(tools.MockTodos)
-
 	})
 
 	http.ListenAndServe(":8000", r)
